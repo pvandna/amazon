@@ -1,0 +1,49 @@
+.footer {
+    background-color: #232f3e;
+    color: white;
+    margin: 10px;
+ 
+ 
+}
+
+
+
+.one {
+    display: flex;
+    justify-content: space-evenly;
+  /* align-items: flex-start; */
+  padding-top: 50px;
+
+ 
+}
+
+.oneul {
+    list-style: none;
+  
+}
+
+.oneul li {
+    line-height: 30px;
+    font-size: 14px;
+    margin-top: 0;
+    cursor: pointer;
+}
+
+.oneul li:hover {
+    color: #ff9900;
+}
+
+.logo {
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+}
+
+.img {
+    height: 80px;
+    width: 105px;
+}
+
+.bold {
+    font-weight: 700;
+}

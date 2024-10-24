@@ -1,0 +1,230 @@
+.navbarbelt{
+     background-color:#131921;
+     display: flex;
+     width: 100%;
+     height: 60px;
+     color: white;
+     box-sizing: border-box;
+}
+.left{
+    display: flex;
+    gap: 5px;
+    padding: 10px;
+
+}
+.navbar_logo{
+   
+    text-decoration: none;
+    align-items: center;
+    color: white;
+    display: flex;
+    padding: 5px;
+    cursor: pointer;
+}
+
+
+
+.navbar_logo:hover {
+    border: 1px solid;
+    border-radius: 3px;
+   
+}
+.navbar-img{
+  
+     width: 97px;
+  
+
+}
+.navbar-in{
+    
+    margin-top: -10px;
+    margin-left: -6px;
+    font-weight: 500;
+
+
+}
+
+.navbarbelt-second{
+    display: flex;
+    gap:9px;
+    padding:8px ;
+  font-weight: 200;
+    margin-left: 6px;
+    align-items: center;
+}
+.navbarbelt-second:hover{
+    border: 1px solid;
+    border-radius:3px ;
+
+}
+
+.update-location{
+    font-weight: 500;
+    
+}
+
+
+.navbar-search{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* padding: 10px 4px; */
+    height: 100%;
+    width: 50%;
+}
+.navbarsearch-div{
+    display: flex;
+    
+    width: 100%; 
+    gap: 2px;
+    border-radius: 5px;
+   
+}
+.all{
+    display: flex;
+    background-color: #cdcdcd;
+    gap:5px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    justify-content: center;
+    align-items: center;
+    padding-left: 15px;
+    padding-right: 15px;
+    cursor: pointer;
+    color: #999;
+     width: 140px;
+
+   
+
+  
+}
+.all select{
+    background-color: #cdcdcd;
+    border: none;
+    outline: none;
+     /* width: auto; */
+    min-width: 10px; 
+
+}
+
+
+ 
+.all select option{
+    padding: 30px; 
+    margin: 20px;
+}
+.fa-solid{
+    font-size: 12px;
+    font-weight: 600;
+    
+}
+.navbar-inputbox{
+
+    /* height: 40px; */
+    width: 100%;
+   
+  border: 2px solid white;
+    padding: 5px;
+   
+
+}
+.navbar-inputbox:focus{
+    outline: none;
+}
+.navbar-inputbox::placeholder{
+    color: gray;
+    font-size: 15px;
+    font-weight: 500;
+}
+.navbarsearch-icon{
+    background-color:#febd69;
+     padding-left: 15px;
+     padding-right: 15px;
+     border: 2px solid #febd69;
+
+    /* height: 40px; */
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+  
+    
+}
+
+
+.suggestions-dropdown {
+    position: absolute;
+    background-color: white;
+    border: 1px solid #ccc;
+    max-height: 200px;
+    overflow-y: auto;
+    width: 50%;
+    z-index: 1000;
+    margin-top: 30px;
+  }
+  
+  .suggestion-item {
+    padding: 10px;
+    cursor: pointer;
+    border-bottom: 1px solid #eee;
+    color: #131921;
+  }
+  
+  .suggestion-item:hover {
+    background-color: #f5f5f5;
+
+  }
+
+
+
+.right,.card-main{
+    display: flex;
+    color: white;
+    /* padding: 5px; */
+    gap:1px
+}
+.flagdiv{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    margin-left: 10px;
+    height: 40px;
+    padding: 2px;
+    gap:5px;
+    cursor: pointer;
+    
+}
+.flagdiv:hover,.card-main:hover{
+    border-radius: 3px;
+    border: 1px solid;
+}
+.india-flag{
+    width: 20px;
+    height: 20px;
+}
+.right-arrow i {
+    margin-left: 5px; /* Adjust the value as needed */
+  }
+  .right-arrow {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Aligns EN and icon vertically */
+  }
+  
+  .right-arrow i {
+    margin-left: 5px; /* Adjust this value as needed */
+  }
+    
+  .card{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+   
+
+  }
+  .card-div{
+    display: flex;
+    flex-direction: column;
+    padding: 2px;
+    margin-right: 5px;
+  }
+

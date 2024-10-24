@@ -1,23 +1,35 @@
-import logo from './logo.svg';
+
 import './App.css';
+import Footer from './Component/Footer/Footer';
+import Navbar from './Component/Navbar/Navbar';
+import Homescreen from './Screen/Homescreen/Homescreen';
+import { Routes, Route } from 'react-router-dom'; // Import Routes, Route, and Link
+import Producs from './Screen/Products/Producs';
+import NotFound from './NotFound';
+import { SearchProvider } from './Context/SearchContext';
+
+
+
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <SearchProvider>
+        <Navbar />
+        <Routes>
+          <Route path='/' element={<Homescreen />}> </Route>
+          <Route path='/products' element={<Producs />}>
+
+          </Route>
+          <Route path='*' element={<NotFound />} /> {/* Catch all unmatched routes */}
+
+
+        </Routes>
+
+
+        <Footer />
+      </SearchProvider>
+
     </div>
   );
 }
