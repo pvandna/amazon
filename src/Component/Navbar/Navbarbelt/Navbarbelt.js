@@ -10,13 +10,16 @@ import { SearchContext } from '../../../Context/SearchContext'; // Import the co
 
 function Navbarbelt() {
   const [searchInput, setSearchInput] = useState('');
-  const { setSearchQuery, suggestions, setSuggestions } = useContext(SearchContext); // Get context values
+  const { setSearchQuery, suggestions, setSuggestions,cartCount } = useContext(SearchContext); // Get context values
   const navigate = useNavigate();
   const searchRef = useRef(null);
   const suggestionsRef = useRef(null);
   const [products, setProducts] = useState([]);
   const location = useLocation();
-
+  
+  const handleCartPage = () => {
+    navigate('/cart'); // Navigate to the cart page
+  };
 
 
 
@@ -88,7 +91,10 @@ function Navbarbelt() {
 
 
   };
+  const cartpage = () => {
+    navigate('/cart')
 
+  }
 
 
   return (
@@ -125,7 +131,7 @@ function Navbarbelt() {
 
       <div className='navbar-search' ref={searchRef}>
         <div className='navbarsearch-div'>
-        
+
           <div className='all'>
 
             <select id="fruit" name="fruit">
@@ -261,15 +267,15 @@ function Navbarbelt() {
 
 
 
-      <div className='card-main'>
+      <div className='card-main' onClick={handleCartPage}>
         <div className='card'>
-          <div className='card-div'>
-            <span style={{ color: "#febd69" }}>0</span>
+          <div className='card-div' onClick={cartpage}>
+            <span style={{ color: "#febd69" }}>{cartCount}</span>
 
 
             <i class="fa-solid fa-cart-shopping"></i>
           </div>
-          <div className='cart-sign '>
+          <div className='cart-sign ' >
             cart
 
 

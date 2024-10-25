@@ -1,6 +1,7 @@
 import React from 'react'
 import './Homebanner.css'
 import homeBannerItemProduct from '../../../Homeproduvt.json';
+import { Link } from 'react-router-dom';
 const Homebanner = () => {
     return (
         <div className="homeBanner">
@@ -32,7 +33,8 @@ const Homebanner = () => {
 
                                 </div>
                            
-                                <div className="seeMoreHomeBanner">See More</div>
+                                <Link to="./products" className="seeMoreHomeBanner">See More</Link>
+                              
                               
 
                                

@@ -1,28 +1,32 @@
-import React, { useEffect, useState,useContext } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import './Products.css';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import { SearchContext } from '../../Context/SearchContext'; // Import the context for search bar search
-import { useLocation } from 'react-router-dom';
+
+
 function Producs() {
 
-  const location = useLocation();
-  const PRODUCT = location.state; // The data passed from Page 1
+
+
   let [categories, setCategories] = useState([]);
   let [card, setCard] = useState([]);
-  let[catName,setcatName]=useState("");
-  const { searchQuery } = useContext(SearchContext); // Get searchQuery from context
- 
+  let [catName, setcatName] = useState("");
+  const { searchQuery, addToCart } = useContext(SearchContext); // Get searchQuery from context
+
 
 
   const exchangeRate = 82; // Set your USD to INR exchange rate here
 
 
-  
-  
+
+
 
   useEffect(() => {
-   
+
     if (searchQuery) {
-      
+
       fetch(`https://dummyjson.com/products/search?q=${searchQuery}`)
         .then((res) => res.json())
         .then((finalRes) => {
@@ -53,7 +57,7 @@ function Producs() {
       .then((res) => res.json())
       .then((finalRes) => {
         // Filter out products with index 5, 6, and 21-30
-        const filteredProducts = finalRes.products.filter((_, index) =>index !== 4 && index !== 5 && index !== 6 && (index < 15 || index > 30));
+        const filteredProducts = finalRes.products.filter((_, index) => index !== 4 && index !== 5 && index !== 6 && (index < 15 || index > 30));
 
         setCard(filteredProducts); // Set the filtered products
         console.log(filteredProducts);
@@ -69,27 +73,27 @@ function Producs() {
 
   }, []);
 
-  useEffect(()=>{
-    if( catName!=="")
+  useEffect(() => {
+    if (catName !== "")
       fetch(`https://dummyjson.com/products/category/${catName}`)
-    .then((res) => res.json())
-    .then((finalRes) => {
+        .then((res) => res.json())
+        .then((finalRes) => {
 
-     const filteredProducts = finalRes.products.filter((_, index) => index < 12);
+          const filteredProducts = finalRes.products.filter((_, index) => index < 12);
 
-      setCard(filteredProducts); // Set the filtered products
-      console.log(filteredProducts);
-     
+          setCard(filteredProducts); // Set the filtered products
+          console.log(filteredProducts);
 
-      
-  
-    })
-    .catch((error) => {
-      console.error('Error fetching products:', error);
-    });
-   
 
-  },[catName])
+
+
+        })
+        .catch((error) => {
+          console.error('Error fetching products:', error);
+        });
+
+
+  }, [catName])
   return (
     <div className='products'>
 
@@ -110,9 +114,9 @@ function Producs() {
       </div>
       <div className="main-product">
         <div className="left-product">
-        <h3 style={{ margin: '20px 3px 20px 3px' }}>PRODUCTS CATEGORY</h3>
+          <h3 style={{ margin: '20px 3px 20px 3px' }}>PRODUCTS CATEGORY</h3>
           {categories.map((category, index) => (
-            <div onClick={()=>setcatName(category)} key={index}>{category}</div> // Corrected category display
+            <div onClick={() => setcatName(category)} key={index}>{category}</div> // Corrected category display
           ))}
         </div>
 
@@ -124,6 +128,7 @@ function Producs() {
 
           {card.map((product, index) => (
             <div className="productLongCardItem" key={index}>
+
               {/* <img className="productLongCardItemImg" src={product.images[0]} alt={product.title} />  */}
               <img className="productLongCardItemImg" src={product.thumbnail} alt={product.title} />
 
@@ -140,12 +145,14 @@ function Producs() {
               <div className="productLongCardItemImgDetail">
                 <div className="productLongCardItemImgTopDetail">
                   <div className="productlimitedTimeDealhomeDetail" style={{ fontWeight: 'bold', fontSize: '15px' }}>
-                  ₹{(product.price * exchangeRate).toFixed(2)} {/* Price in INR */}
+                    ₹{(product.price * exchangeRate).toFixed(2)} {/* Price in INR */}
                   </div>
 
-                  <div className="productPercentageOff">
+                  <div className="productPercentageOff" onClick={() => addToCart(product)} >
                     Add To Cart
                   </div>
+
+
                 </div>
 
                 <div className="productbottomHomeDetail" style={{ color: 'gray' }}>
@@ -159,15 +166,21 @@ function Producs() {
             </div>
           ))}
 
-
+          <ToastContainer position="bottom-right" />
 
 
 
         </div>
+
+
+
       </div>
+
     </div>
 
+
   )
+
 }
 
 export default Producs

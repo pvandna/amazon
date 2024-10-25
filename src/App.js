@@ -7,6 +7,7 @@ import { Routes, Route } from 'react-router-dom'; // Import Routes, Route, and L
 import Producs from './Screen/Products/Producs';
 import NotFound from './NotFound';
 import { SearchProvider } from './Context/SearchContext';
+import Cart from './Screen/Cart/Cart';
 
 
 
@@ -18,9 +19,11 @@ function App() {
         <Navbar />
         <Routes>
           <Route path='/' element={<Homescreen />}> </Route>
-          <Route path='/products' element={<Producs />}>
+          <Route path='/products' element={<Producs />}></Route>
+          <Route path='/cart' element={<Cart />}>   </Route>
+          
 
-          </Route>
+       
           <Route path='*' element={<NotFound />} /> {/* Catch all unmatched routes */}
 
 
