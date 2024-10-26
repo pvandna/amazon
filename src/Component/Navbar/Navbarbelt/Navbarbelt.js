@@ -3,62 +3,57 @@ import './Navbarbelt.css';
 import { useContext, useState, useRef, useEffect } from 'react';
 import amazonelogo from '../../../Assets/amazon_logo.png';
 import flag from '../../../Assets/flag.png';
-import { useLocation } from 'react-router-dom';
-import { Link, useNavigate } from 'react-router-dom';
+import {useLocation, Link, useNavigate } from 'react-router-dom';
 import { SearchContext } from '../../../Context/SearchContext'; // Import the context
 
 
 function Navbarbelt() {
+
   const [searchInput, setSearchInput] = useState('');
   const { setSearchQuery, suggestions, setSuggestions,cartCount } = useContext(SearchContext); // Get context values
   const navigate = useNavigate();
   const searchRef = useRef(null);
   const suggestionsRef = useRef(null);
-  const [products, setProducts] = useState([]);
   const location = useLocation();
   
-  const handleCartPage = () => {
-    navigate('/cart'); // Navigate to the cart page
-  };
-
-
-
-
-  // ----------------Define the fetch Products function so that it move / to /product(with the help of navigator)with search data-----------------------------------------
-
-  // Get search query from URL
+  
+  //----------------------------------Fetch products based on the query from URL when the component mounts it use when we are on home page----------------------------------
   const searchParams = new URLSearchParams(location.search);
-  const query = searchParams.get('query'); // Extract the 'query' parameter from URL
-  const fetchProducts = (query) => {
+  const queryy= searchParams.get('myquery'); // Extract the 'query' parameter from URL
+ 
+   useEffect(() => {
+    if (queryy) {
+      fetchSuggestions(queryy); // Fetch products based on search query
+      console.log(" vandna querry",queryy)
+    }
+  }, [queryy]);
 
-    fetch(`https://dummyjson.com/products/search?q=${query}`)
-      .then((res) => res.json())
-      .then((data) => {
-        setProducts(data.products); // Update the products list
+  //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-      })
-      .catch((error) => {
-        console.error('Error fetching products:', error);
+  const handleSearch = () => {
+    if (searchInput.trim()) {
 
-      });
+      setSearchQuery(searchInput); // Update the search query in context
+      setSuggestions([]); // Clear suggestions after search
+      navigate(`/products?myquery=${encodeURIComponent(searchInput)}`); // Navigate to products page with query
+     
+      setSearchInput("")
+
+      
+    }
   };
 
-  // Fetch products based on the query from URL when the component mounts
-  useEffect(() => {
-    if (query) {
-      fetchProducts(query); // Fetch products based on search query
-    }
-  }, [query]);
-  //---------------------------------------------------------------------------------------------------------------------------------------------
-
-  // Fetch suggestions based on input
+ 
+ // Fetch suggestions based on input
   const fetchSuggestions = (query) => {
-    if (query.length > 0) {
+    if (query.length > 1) {
       fetch(`https://dummyjson.com/products/search?q=${query}`)
         .then((res) => res.json())
         .then((data) => {
           const suggestionList = data.products.map((product) => product.title);
           setSuggestions(suggestionList);
+          
+     
         })
         .catch((error) => {
           console.error('Error fetching suggestions:', error);
@@ -67,7 +62,7 @@ function Navbarbelt() {
       setSuggestions([]); // Clear suggestions if query is too short
     }
   };
-
+ 
   const handleInputChange = (e) => {
     const query = e.target.value;
     setSearchInput(query);
@@ -75,26 +70,17 @@ function Navbarbelt() {
 
   };
 
-  const handleSearch = () => {
-    if (searchInput.trim()) {
-
-      setSearchQuery(searchInput); // Update the search query in context
-      setSuggestions([]); // Clear suggestions after search
-      navigate(`/products?query=${encodeURIComponent(searchInput)}`); // Navigate to products page with query
-      setSearchInput("")
-    }
-  };
-
+ 
   const handleSuggestionClick = (suggestion) => {
     setSearchInput(suggestion); // Set input to the selected suggestion
     setSuggestions([]); // Clear suggestions after selection
 
 
   };
-  const cartpage = () => {
+   const hadleCartPage =()=>{
     navigate('/cart')
-
-  }
+   }
+ 
 
 
   return (
@@ -201,7 +187,7 @@ function Navbarbelt() {
           </div>
 
           {/* Suggestions Dropdown */}
-          {suggestions.length > 0 && (
+          {searchInput.length > 0 && suggestions.length > 0 && (
             <div className='suggestions-dropdown' ref={suggestionsRef}>
               {suggestions.map((suggestion, index) => (
                 <div
@@ -267,9 +253,9 @@ function Navbarbelt() {
 
 
 
-      <div className='card-main' onClick={handleCartPage}>
+      <div className='card-main' onClick={hadleCartPage}>
         <div className='card'>
-          <div className='card-div' onClick={cartpage}>
+          <div className='card-div'>
             <span style={{ color: "#febd69" }}>{cartCount}</span>
 
 
